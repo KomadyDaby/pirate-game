@@ -16,6 +16,10 @@ class Grid():
 
         self.populate_grid(actions)
 
+    def __str__(self) -> None:
+        pass
+
+
     def get(self, x: str, y: int) -> Action:
         return self.grid.loc[self.grid.index[y], x]
 

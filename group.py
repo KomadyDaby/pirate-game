@@ -5,3 +5,6 @@ class Group():
     def __init__(self, name: str, players: List[Player]) -> None:
         self.name = name
         self.group = players
+
+    def __str__(self) -> None:
+        pass

@@ -14,6 +14,8 @@ class Player():
         self.name = name
         self.grid = Grid(x, y, actions)
 
+    def __str__(self) -> None:
+        pass
 
     def get_action(self, x: str, y: int) -> Action:
         return self.grid.get(x, y)
