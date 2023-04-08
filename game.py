@@ -5,6 +5,7 @@ from grid import Grid
 from typing import List, Dict, Tuple, Optional
 import random
 import string
+import re
 
 class Game():
     previous_moves = []
@@ -60,7 +61,7 @@ class Game():
                     player.add_mirror()
 
     def kill_player(self, name: str, player: Player, action: Action) -> None:
-        choice = action.execute(self.players.keys().remove(name))
+        choice = action.execute(list(self.players.keys()).remove(name))
         respose = self.players[choice].defend()
         if response == 'None':
             print(f'{name} killed {choice}')
@@ -98,12 +99,12 @@ class Game():
                 elif action.get_name() == 'Kill a Group':
                     pass
                 elif action.get_name() == 'Swap Cash':
-                    choice = action.execute(self.players.keys().remove(name))
+                    choice = action.execute(list(self.players.keys()).remove(name))
                     player_cash = player.get_cash()
                     player.update_cash(self.players[choice].get_cash())
                     self.players[choice].update_cash(player_cash)
                 elif action.get_name() == 'Rob a Player':
-                    choice = action.execute(self.players.keys().remove(name))
+                    choice = action.execute(list(self.players.keys()).remove(name))
                     player.add_cash(self.players[choice].get_cash())
                     self.players[choice].reset_cash()
                 elif action.get_name() == 'Choose next square':
@@ -118,13 +119,6 @@ class Game():
         self.passive_actions(x, y)
 
         self.active_actions(x, y)
-
-
-
-
-
-
-
 
 
 
@@ -158,3 +152,4 @@ actions = {
 }
 
 game = Game(12, 4, 7, 7, actions)
+game.play()

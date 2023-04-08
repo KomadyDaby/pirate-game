@@ -16,6 +16,9 @@ class Grid():
 
         self.populate_grid(actions)
 
+    def get(self, x: str, y: int) -> Action:
+        return self.grid.loc[self.grid.index[y], x]
+
     def populate_grid(self, actions: Dict[Action, int]) -> None:
         coords = [(x, y) for x in range(self.x) for y in range(self.y)]
         random.shuffle(coords)

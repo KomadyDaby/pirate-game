@@ -16,7 +16,7 @@ class Player():
 
 
     def get_action(self, x: str, y: int) -> Action:
-        return self.grid.loc[self.grid.index[y], x]
+        return self.grid.get(x, y)
 
     def get_cash(self) -> int:
         return self.cash
