@@ -2,17 +2,15 @@ from player import Player
 from group import Group
 from action import Action, Active, Passive, LuckyDip
 from grid import Grid
-from typing import List
+from typing import List, Dict, Tuple, Optional
 import random
 import string
-
-#df.loc[df.index[1], 'A']
 
 class Game():
     previous_moves = []
     next_moves = []
 
-    def __init__(self, n_players: int, n_groups: int, x: int, y: int, actions: List[Action, int]) -> None:
+    def __init__(self, n_players: int, n_groups: int, x: int, y: int, actions: Dict[Action, int]) -> None:
         self.x = list(string.ascii_uppercase)[:x]
         self.y = list(range(y))
 
@@ -22,7 +20,7 @@ class Game():
         for p in range(n_players):
             self.players[p] = Player(str(p), x, y, actions)
 
-        players = self.players.values()
+        players = list(self.players.values())
         random.shuffle(players)
 
         self.groups = {}
@@ -61,7 +59,7 @@ class Game():
                 elif action.get_name() == 'Mirror':
                     player.add_mirror()
 
-    def kill_player(self, name: str, player: Player) -> None:
+    def kill_player(self, name: str, player: Player, action: Action) -> None:
         choice = action.execute(self.players.keys().remove(name))
         respose = self.players[choice].defend()
         if response == 'None':
@@ -96,7 +94,7 @@ class Game():
 
             if type(action) == Active:
                 if action.get_name() == 'Kill a Player':
-                    self.kill_player(name, player)
+                    self.kill_player(name, player, action)
                 elif action.get_name() == 'Kill a Group':
                     pass
                 elif action.get_name() == 'Swap Cash':
