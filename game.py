@@ -21,6 +21,8 @@ class Game():
         for p in range(n_players):
             self.players[p] = Player(str(p), x, y, actions)
 
+        print(self.players)
+
         players = list(self.players.values())
         random.shuffle(players)
 
@@ -28,6 +30,8 @@ class Game():
         group_size = n_players//n_groups
         for g in range(n_groups): 
             self.groups[g] = Group(str(g), players[g*group_size: min(n_players, (g+1)*group_size)])
+
+        print(self.groups)
 
         self.moves = [f'{x}{y}' for x in self.x for y in self.y]
         random.shuffle(self.moves)
@@ -68,9 +72,9 @@ class Game():
             self.players[choice].reset_cash()
         elif response == 'Shield':
             print(f'{name} tried to kill {choice} but {choice} used their shield.')
-        elif reponse == 'Mirror':
+        elif response == 'Mirror':
             print(f'{name} tried to kill {choice} but {choice} used their mirror.')
-            while reponse == 'Mirror':
+            while response == 'Mirror':
                 response = player.defend()
                 if response == 'None':
                     print(f'{choice} killed {name}')
@@ -85,7 +89,7 @@ class Game():
                         self.players[choice].reset_cash()
                     elif response == 'Shield':
                         print(f'{name} tried to mirror {choice} but {choice} used their shield.')
-                    elif reponse == 'Mirror':
+                    elif response == 'Mirror':
                         print(f'{name} tried to mirror {choice} but {choice} used their mirror.')
 
 

@@ -12,6 +12,9 @@ class Action():
     def execute(self, _) -> None:
         pass
 
+    def __str__(self) -> None:
+        pass
+
 
 
 class Passive(Action):
@@ -24,12 +27,18 @@ class Passive(Action):
     def execute(self, cash: int) -> int:
         return eval(f'{cash} {self.operation} {self.value}')
     
+    def __str__(self) -> None:
+        pass
+
+    
 
 
 class Active(Action):
     def execute(self, choices: List[Any]) -> Any:
         return input(f'Enter your coice from the following: {choices}')
     
+    def __str__(self) -> None:
+        pass
 
 
 class LuckyDip(Action):
@@ -40,3 +49,6 @@ class LuckyDip(Action):
     def execute(self, arg: Union[List[Any], int]) -> Any:
         action =  random.choice(self.choices)
         return action.execute(arg)
+    
+    def __str__(self) -> None:
+        pass
